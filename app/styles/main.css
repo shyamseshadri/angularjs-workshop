@@ -9,6 +9,10 @@
   float: left;
 }
 
+.form-horizontal {
+  padding-top: 20px;
+}
+
 
 .recipe-list div {
   display: block;

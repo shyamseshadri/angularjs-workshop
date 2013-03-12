@@ -19,8 +19,18 @@
         </div>
       </div>
       <div class="span9">
+        <form class="form-horizontal">
+          <div class="control-group">
+            <label class="control-label" for="search-field">Search:</label>
+            <div class="controls">
+              <input type="text" ng-model="searchTerms" class="input-medium search-query" id="search-field" placeholder="Enter terms here...">
+            </div>
+          </div>
+        </form>
+
+
         <ul class="recipes-list">
-          <li class="span4 thumbnails recipe-list" ng-repeat="recipe in recipes">
+          <li class="span4 thumbnails recipe-list" ng-repeat="recipe in recipes | filter:searchTerms">
             <div class="recipe-thumbnail" ng-class="{featured: recipe.featured}">
               <img class="recipe-thumbnail img-polaroid">
               <strong class="title">{{recipe.name}}</strong>
