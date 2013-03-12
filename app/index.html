@@ -20,35 +20,11 @@
       </div>
       <div class="span9">
         <ul class="recipes-list">
-          <li class="span4 thumbnails recipe-list">
-            <div class="recipe-thumbnail">
+          <li class="span4 thumbnails recipe-list" ng-repeat="recipe in recipes">
+            <div class="recipe-thumbnail" ng-class="{featured: recipe.featured}">
               <img class="recipe-thumbnail img-polaroid">
-              <strong class="title">Recipe 1</strong>
-              <p>Author: Shyam Seshadri</p>
-              <strong><a class="go_recipe" href="#">Go to Recipe...</a></strong>
-            </div>
-          </li>
-          <li class="span4 thumbnails recipe-list">
-            <div class="recipe-thumbnail">
-              <img class="recipe-thumbnail img-polaroid">
-              <strong class="title">Recipe 2</strong>
-              <p>Author: Shyam Seshadri</p>
-              <strong><a class="go_recipe" href="#">Go to Recipe...</a></strong>
-            </div>
-          </li>
-          <li class="span4 thumbnails recipe-list">
-            <div class="recipe-thumbnail">
-              <img class="recipe-thumbnail img-polaroid">
-              <strong class="title">Recipe 3</strong>
-              <p>Author: Shyam Seshadri</p>
-              <strong><a class="go_recipe" href="#">Go to Recipe...</a></strong>
-            </div>
-          </li>
-          <li class="span4 thumbnails recipe-list">
-            <div class="recipe-thumbnail">
-              <img class="recipe-thumbnail img-polaroid">
-              <strong class="title">Recipe 4</strong>
-              <p>Author: Shyam Seshadri</p>
+              <strong class="title">{{recipe.name}}</strong>
+              <p>Author: {{recipe.author}}</p>
               <strong><a class="go_recipe" href="#">Go to Recipe...</a></strong>
             </div>
           </li>
