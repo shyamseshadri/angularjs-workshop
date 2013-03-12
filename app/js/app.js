@@ -1,16 +1,34 @@
 var angularApp = angular.module('RecipeApp', []);
 
 angularApp.service('RecipeFilterService', function() {
-  return {
-    filters: {}
+  var filterService = {
+    filters: {
+      calories: 0,
+      time: 0,
+      cuisine: '',
+      title: ''
+    },
+    filterRecipes: function(recipe) {
+      var filters  = filterService.filters;
+
+      var valid = true;
+      valid = valid && (filters.calories > 0 ? filters.calories >= recipe.calories : true);
+      valid = valid && (filters.time > 0 ? filters.time >= recipe.time : true);
+      valid = valid && (filters.cuisine != '' ? filters.cuisine === recipe.cuisine : true);
+      valid = valid && (filters.title != '' ? (new RegExp(filters.title, 'i')).test(recipe.title) : true);
+      return valid;
+    }
   };
+  return filterService;
 });
 
 angularApp.controller('RecipeFilterCtrl', ['$scope', 'RecipeFilterService', function($scope, filterService) {
   $scope.filters = filterService.filters;
+  $scope.cuisines = ['Indian', 'Chinese', 'American', 'Italian'];
 }]);
 
-angularApp.controller('RecipeListCtrl', ['$scope', function($scope) {
+angularApp.controller('RecipeListCtrl', ['$scope', 'RecipeFilterService', function($scope, filterService) {
+  $scope.filterService = filterService;
   $scope.recipes = [
     {
       "id": "1",

@@ -27,8 +27,7 @@
               <label for='recipe-cuisine'><strong>Cuisine :</strong></label>
               <select class="span2" id='recipe-cuisine' ng-model="filters.cuisine">
                 <option value="">All</option>
-                <option value="Indian">Indian</option>
-                <option value="Japanese">Japanese</option>
+                <option value="{{cuisine}}" ng-repeat="cuisine in cuisines">{{cuisine}}</option>
               </select>
               <label for='recipe-time'><strong>Time Taken :</strong></label>
               <input class="span2" id="recipe-time" type="number" ng-model="filters.time"> <b>mins.</b>
@@ -40,7 +39,7 @@
 
 
         <ul class="recipes-list" ng-controller="RecipeListCtrl">
-          <li class="span4 thumbnails recipe-list" ng-repeat="recipe in recipes | filter:searchTerms">
+          <li class="span4 thumbnails recipe-list" ng-repeat="recipe in recipes | filter:filterService.filterRecipes">
             <div class="recipe-thumbnail" ng-class="{featured: recipe.featured}">
               <img class="recipe-thumbnail img-polaroid" ng-src="{{recipe.img_url}}">
               <strong class="title">{{recipe.title}}</strong>
