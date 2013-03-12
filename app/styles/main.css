@@ -9,10 +9,15 @@
   float: left;
 }
 
-.form-search {
-  padding-top: 20px;
+.detail-thumbnail {
+  width: 400px;
+  height: 200px;
 }
 
+.create_recipe_thumbnail {
+  width: 300px;
+  height: 200px;
+}
 
 .recipe-list div {
   display: block;
