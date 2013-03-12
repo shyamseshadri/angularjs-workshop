@@ -19,21 +19,31 @@
         </div>
       </div>
       <div class="span9">
-        <form class="form-horizontal">
-          <div class="control-group">
-            <label class="control-label" for="search-field">Search:</label>
-            <div class="controls">
-              <input type="text" ng-model="searchTerms" class="input-medium search-query" id="search-field" placeholder="Enter terms here...">
-            </div>
-          </div>
-        </form>
+        <div class="span12">
+          <span>
+            <form class="form-search form-inline">
+              <label  class="text-success"><strong>Search</strong></label>
+              <input  type="text" class="input-medium search-query">
+              <label for='recipe-cuisine'><strong>Cuisine :</strong></label>
+              <select class="span2" id='recipe-cuisine'>
+                <option value="">All</option>
+                <option value="Indian">Indian</option>
+                <option value="Japanese">Japanese</option>
+              </select>
+              <label for='recipe-time'><strong>Time Taken :</strong></label>
+              <input class="span2" id="recipe-time" type="number" > <b>mins.</b>
+              <label for='recipe-calories'><strong>Calories :</strong></label>
+              <input class="span2" id="recipe-calories" type="number">
+            </form>
+          </span>
+        </div>
 
 
         <ul class="recipes-list">
           <li class="span4 thumbnails recipe-list" ng-repeat="recipe in recipes | filter:searchTerms">
             <div class="recipe-thumbnail" ng-class="{featured: recipe.featured}">
-              <img class="recipe-thumbnail img-polaroid">
-              <strong class="title">{{recipe.name}}</strong>
+              <img class="recipe-thumbnail img-polaroid" ng-src="{{recipe.img_url}}">
+              <strong class="title">{{recipe.title}}</strong>
               <p>Author: {{recipe.author}}</p>
               <strong><a class="go_recipe" href="#">Go to Recipe...</a></strong>
             </div>
@@ -42,6 +52,7 @@
       </div>
     </div>
   </div>
+  <script type="text/javascript" src="vendor/jquery/jquery-1.9.1.js"></script>
   <script type="text/javascript" src="vendor/angular/angular.js"></script>
   <script type="text/javascript" src="js/app.js"></script>
   <script type="text/javascript" src="vendor/bootstrap/js/bootstrap.min.js"></script>
