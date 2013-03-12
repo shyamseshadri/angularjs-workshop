@@ -12,6 +12,7 @@ files = [
   JASMINE_ADAPTER,
 
   'app/vendor/angular/angular.js',
+  'app/vendor/angular/angular-resource.js',
   'app/vendor/angular/angular-mocks.js',
   'app/js/*.js',
   'tests/*.js'

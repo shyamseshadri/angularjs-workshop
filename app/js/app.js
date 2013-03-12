@@ -1,4 +1,4 @@
-var angularApp = angular.module('RecipeApp', []);
+var angularApp = angular.module('RecipeApp', ['ngResource']);
 
 angularApp.config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/', {
@@ -13,6 +13,10 @@ angularApp.config(['$routeProvider', function($routeProvider) {
     templateUrl: 'views/recipeCreateUpdate.html',
     controller: 'RecipeCreateUpdateCtrl'
   }).otherwise({redirectTo: '/'});
+}]);
+
+angularApp.factory('Recipe', ['$resource', function($resource) {
+  return $resource('/api/recipe/:id', {id: '@id'});
 }]);
 
 angularApp.service('RecipeFilterService', function() {
@@ -42,26 +46,19 @@ angularApp.controller('RecipeFilterCtrl', ['$scope', 'RecipeFilterService', func
   $scope.cuisines = ['Indian', 'Chinese', 'American', 'Italian'];
 }]);
 
-angularApp.controller('RecipeListCtrl', ['$scope', 'RecipeFilterService', '$http', function($scope, filterService, $http) {
+angularApp.controller('RecipeListCtrl', ['$scope', 'RecipeFilterService', 'Recipe', function($scope, filterService, Recipe) {
   $scope.filterService = filterService;
-  $http.get('/api/recipe').success(function(recipes) {
-    $scope.recipes = recipes;
-  });
+  $scope.recipes = Recipe.query();
 }]);
 
-angularApp.controller('RecipeViewCtrl', ['$scope', '$routeParams', '$http', function($scope, $routeParams, $http) {
-  $http.get('/api/recipe/' + $routeParams.id).success(function(recipe) {
-    $scope.recipe = recipe;
-  });
-
+angularApp.controller('RecipeViewCtrl', ['$scope', '$routeParams', 'Recipe', function($scope, $routeParams, Recipe) {
+  $scope.recipe = Recipe.get({id: $routeParams.id});
 }]);
-angularApp.controller('RecipeCreateUpdateCtrl', ['$scope', '$routeParams', '$http', '$location',
-    function($scope, $routeParams, $http, $location) {
+angularApp.controller('RecipeCreateUpdateCtrl', ['$scope', '$routeParams', 'Recipe', '$location',
+    function($scope, $routeParams, Recipe, $location) {
 
   if ($routeParams.id) {
-    $http.get('/api/recipe/' + $routeParams.id).success(function(recipe) {
-      $scope.recipe = recipe;
-    });
+    $scope.recipe = Recipe.get({id: $routeParams.id});
   } else {
     $scope.recipe = {
       img_url: 'images/default-recipe-image.png',
@@ -97,12 +94,8 @@ angularApp.controller('RecipeCreateUpdateCtrl', ['$scope', '$routeParams', '$htt
   };
 
   $scope.saveRecipe = function() {
-    var url = '/api/recipe';
-    if ($routeParams.id) {
-      url += '/' + $routeParams.id;
-    }
-    $http.post(url, {recipe: $scope.recipe}).success(function(recipe) {
-      $location.path('/view/' + recipe.id);
+    Recipe.save({id: $scope.recipe.id}, {recipe: $scope.recipe}, function(response) {
+      $location.path('/view/' + response.id);
     });
   };
 }]);
