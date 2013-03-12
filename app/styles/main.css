@@ -1,0 +1,27 @@
+.recipe-thumbnail {
+  width: 200px;
+  height: 100px;
+}
+
+
+.recipe-list {
+  display: inline;
+  float: left;
+}
+
+.recipe-list div {
+  display: block;
+  padding: 10px;
+  border-spacing: 10px;
+  border: 1px;
+  margin-right: 5px;
+  margin-bottom: 80px;
+}
+
+.active a {
+  color: white!important;
+}
+
+hr {
+  height: 10px;
+}
