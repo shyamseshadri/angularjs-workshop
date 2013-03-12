@@ -18,36 +18,7 @@
           </ul>
         </div>
       </div>
-      <div class="span9">
-        <div class="span12">
-          <span>
-            <form class="form-search form-inline" ng-controller="RecipeFilterCtrl">
-              <label  class="text-success"><strong>Search</strong></label>
-              <input  type="text" class="input-medium search-query" ng-model="filters.title">
-              <label for='recipe-cuisine'><strong>Cuisine :</strong></label>
-              <select class="span2" id='recipe-cuisine' ng-model="filters.cuisine">
-                <option value="">All</option>
-                <option value="{{cuisine}}" ng-repeat="cuisine in cuisines">{{cuisine}}</option>
-              </select>
-              <label for='recipe-time'><strong>Time Taken :</strong></label>
-              <input class="span2" id="recipe-time" type="number" ng-model="filters.time"> <b>mins.</b>
-              <label for='recipe-calories'><strong>Calories :</strong></label>
-              <input class="span2" id="recipe-calories" type="number" ng-model="filters.calories">
-            </form>
-          </span>
-        </div>
-
-
-        <ul class="recipes-list" ng-controller="RecipeListCtrl">
-          <li class="span4 thumbnails recipe-list" ng-repeat="recipe in recipes | filter:filterService.filterRecipes">
-            <div class="recipe-thumbnail" ng-class="{featured: recipe.featured}">
-              <img class="recipe-thumbnail img-polaroid" ng-src="{{recipe.img_url}}">
-              <strong class="title">{{recipe.title}}</strong>
-              <p>Author: {{recipe.author}}</p>
-              <strong><a class="go_recipe" href="#">Go to Recipe...</a></strong>
-            </div>
-          </li>
-        </ul>
+      <div class="span9" ng-view>
       </div>
     </div>
   </div>

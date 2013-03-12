@@ -1,5 +1,12 @@
 var angularApp = angular.module('RecipeApp', []);
 
+angularApp.config(['$routeProvider', function($routeProvider) {
+  $routeProvider.when('/', {
+    templateUrl: 'views/recipeList.html'
+  });
+
+}]);
+
 angularApp.service('RecipeFilterService', function() {
   var filterService = {
     filters: {
@@ -159,4 +166,40 @@ angularApp.controller('RecipeListCtrl', ['$scope', 'RecipeFilterService', functi
       "img_url": "images/baked_mushroom_macaroni-3940.jpg"
     }
   ];
+}]);
+
+angularApp.controller('RecipeViewCtrl', ['$scope', function($scope) {
+  // Fetch the right recipe
+}]);
+angularApp.controller('RecipeCreateUpdateCtrl', ['$scope', function($scope) {
+
+  $scope.recipe = {};
+  // Fetch from the server
+  
+  $scope.addIngredient = function() {
+    $scope.recipe.ingredients.push({name: null, amount: null});
+  };
+
+  $scope.removeIngredient = function(index) {
+    $scope.recipe.ingredients.splice(index, 1);
+  };
+
+  $scope.addCookingSteps = function() {
+    $scope.recipe.method.push({step: null});
+  };
+
+  $scope.removeCookingStep = function(index) {
+    $scope.recipe.method.splice(index, 1);
+  };
+
+  $scope.addCookingTips = function() {
+    $scope.recipe.cooking_tips.push({tip: null});
+  };
+
+  $scope.removeCookingTip = function(index) {
+    $scope.recipe.cooking_tips.splice(index, 1);
+  };
+
+  $scope.saveRecipe = function() {
+  };
 }]);
