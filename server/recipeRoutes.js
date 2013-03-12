@@ -19,7 +19,11 @@ module.exports = function(app, load_json, users_json){
       }
       res.send(to_send);
     } else {
-      res.send(recipes);
+      var to_send = [];
+      for (var id in recipes) {
+        to_send.push(recipes[id]);
+      }
+      res.send(to_send);
     }
 
   });
@@ -28,12 +32,12 @@ module.exports = function(app, load_json, users_json){
     var recipe = req.body.recipe;
     recipe.id = lastID++;
     recipes[recipe.id] = recipe;
-    res.send('Done : Created');
+    res.send(recipe);
   });
 
   app.post('/api/recipe/:id', function(req, res) {
     var recipe = req.body.recipe;
     recipes[req.params.id] = recipe;
-    res.send('Done : Update');
+    res.send(recipe);
   });
 };

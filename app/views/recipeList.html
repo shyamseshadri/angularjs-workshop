@@ -23,7 +23,7 @@
       <img class="recipe-thumbnail img-polaroid" ng-src="{{recipe.img_url}}">
       <strong class="title">{{recipe.title}}</strong>
       <p>Author: {{recipe.author}}</p>
-      <strong><a class="go_recipe" href="#">Go to Recipe...</a></strong>
+      <strong><a class="go_recipe" ng-href="#/view/{{recipe.id}}">Go to Recipe...</a></strong>
     </div>
   </li>
 </ul>
