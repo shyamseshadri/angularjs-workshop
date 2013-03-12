@@ -1,5 +1,15 @@
 var angularApp = angular.module('RecipeApp', []);
 
+angularApp.service('RecipeFilterService', function() {
+  return {
+    filters: {}
+  };
+});
+
+angularApp.controller('RecipeFilterCtrl', ['$scope', 'RecipeFilterService', function($scope, filterService) {
+  $scope.filters = filterService.filters;
+}]);
+
 angularApp.controller('RecipeListCtrl', ['$scope', function($scope) {
   $scope.recipes = [
     {
