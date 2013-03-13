@@ -36,4 +36,24 @@ describe('Recipe App', function() {
       expect(filterService.filterRecipes(recipe)).toBeFalsy();
     });
   });
+
+  describe('RecipeFilterController', function() {
+    var filterService, scope, ctrl;
+    beforeEach(inject(function(RecipeFilterService, $controller, $rootScope) {
+      scope = $rootScope.$new();
+      filterService = RecipeFilterService;
+
+      ctrl = $controller('RecipeFilterCtrl', {
+        $scope: scope
+      });
+    }));
+
+    it('should use a singleton recipe filter service', function() {
+      filterService.filters.calories = 123;
+      filterService.filters.time = 323;
+
+      expect(scope.filters.calories).toEqual(123);
+      expect(scope.filters.time).toEqual(323);
+    });
+  });
 });
