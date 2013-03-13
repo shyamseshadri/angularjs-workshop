@@ -1,6 +1,15 @@
 describe('Recipe App', function() {
 
   beforeEach(module('RecipeApp'));
+
+  beforeEach(function(){
+    this.addMatchers({
+      toEqualData: function(expected) {
+        return angular.equals(this.actual, expected);
+      }
+    });
+  });
+
   describe('RecipeFilterService', function() {
     var filterService;
     beforeEach(inject(function(RecipeFilterService) {
@@ -54,6 +63,29 @@ describe('Recipe App', function() {
 
       expect(scope.filters.calories).toEqual(123);
       expect(scope.filters.time).toEqual(323);
+    });
+  });
+
+  describe('RecipeViewCtrl', function() {
+    var ctrl, scope, mockBackend;
+    beforeEach(inject(function($controller, $rootScope, $httpBackend) {
+      scope = $rootScope.$new();
+      mockBackend = $httpBackend;
+
+      $httpBackend.expectGET('/api/recipe/15').respond({id: 15, title: "Awesome Recipe", author: 'Shyam'});
+
+      ctrl = $controller('RecipeViewCtrl', {
+        $scope: scope,
+        $routeParams: {id: 15}
+      });
+    }));
+
+    it('should load the recipe based on id', function() {
+      expect(scope.recipe).toEqualData({});
+
+      mockBackend.flush();
+
+      expect(scope.recipe).toEqualData({id: 15, title: "Awesome Recipe", author: 'Shyam'});
     });
   });
 });
