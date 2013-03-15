@@ -15,6 +15,16 @@ angularApp.config(['$routeProvider', function($routeProvider) {
   }).otherwise({redirectTo: '/'});
 }]);
 
+angularApp.directive('recipePoster', function() {
+  return {
+    scope: {
+      content: '='
+    },
+    restrict: 'A',
+    templateUrl: 'views/recipePoster.html'
+  };
+});
+
 angularApp.factory('Recipe', ['$resource', function($resource) {
   return $resource('/api/recipe/:id', {id: '@id'});
 }]);

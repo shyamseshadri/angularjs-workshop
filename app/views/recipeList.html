@@ -20,6 +20,6 @@
 <ul class="recipes-list" ng-controller="RecipeListCtrl">
   <li class="span4 thumbnails recipe-list"
       ng-repeat="recipe in recipes | filter:filterService.filterRecipes"
-      ng-include="'views/recipePoster.html'">
+      recipe-poster content="recipe">
   </li>
 </ul>
