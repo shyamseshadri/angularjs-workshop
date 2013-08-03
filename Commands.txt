@@ -1,0 +1,56 @@
+Session 1, Day 1
+
+Checkout:
+git clone git://github.com/shyamseshadri/angularjs-workshop.git
+cd angularjs-workshop
+git checkout –f session1-step0 
+
+Run:
+cd app
+python –m SimpleHTTPServer
+
+
+Session 2, Day 1
+
+Checkout:
+git checkout –f session2-step0 
+
+Run:
+cd app
+python –m SimpleHTTPServer
+
+
+Session 3, Day 2
+Checkout:
+git checkout –f session3-step0
+
+Start Server:
+npm install express
+node server/index.js
+
+
+Session 4, Day 2
+
+Checkout:
+git checkout –f session4-step0
+
+Add:
+‘app/vendor/angular/angular-resource.js’ to files[] In testacular.conf.js
+
+Run:
+karma start testacular.conf.js
+
+
+Checkout:
+git checkout –f session4-step3
+
+Run:
+node server/index.js
+testacular start tests/e2e/testacular.e2e.conf.js
+
+
+Session 5, Day 3
+
+Run
+git checkout –f session5-step1
+node server/index.js
